@@ -52,5 +52,35 @@ public class Assignment {
             }
         }
 
+            double totalAverageTemperature = 0;
+            double highestTemperature = HighestTemperature[0];
+            double lowestTemperature = LowestTemperature[0];
+            int highestTemperatureDay = 0;
+            int lowestTemperatureDay = 0;
+
+            for (int dayIndex = 0; dayIndex < days; dayIndex++) {
+                double AverageTemperatureDay = (LowestTemperatureDay[dayIndex] + HighestTemperatureDay[dayIndex]) / 2;
+                AverageTemperature += AverageTemperatureDay;
+
+                if (HighestTemperature[dayIndex] > highestTemperature) {
+                    highestTemperature = HighestTemperature[dayIndex];
+                    highestTemperatureDay = dayIndex;
+                }
+
+                if (LowestTemperature[dayIndex] < lowestTemperature) {
+                    lowestTemperature = LowestTemperature[dayIndex];
+                    lowestTemperatureDay = dayIndex;
+                }
+                System.out.println("Day " + (dayIndex + 1) + " average - " + AverageTemperatureDay);
+            }
+            AverageTemperature /= days;
+            System.out.println("\nOverall average temperature: " + AverageTemperature);
+            System.out.println("Day with highest temperature: Day " + (highestTemperatureDay + 1) + " with " + highestTemperature);
+            System.out.println("Day with lowest temperature: Day " + (lowestTemperatureDay + 1) + " with " + lowestTemperature);
+
+        } catch (Exception e) {
+            System.out.println("Error. Enter a valid input ");
+        }
+
     }
 }
