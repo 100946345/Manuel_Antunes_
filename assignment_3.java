@@ -1,7 +1,10 @@
 /*   Name: Manuel Antunes
      Date: 2025-03-09
-     Description:
-*/
+     Description: This program calculates the results of a bowling
+     game based on the user's input, displays the game score, and
+     asks if the user wants to play again.
+
+ */
 
 import java.util.Scanner;
 
@@ -28,14 +31,12 @@ public class assignment_3 {
 
 
 
-
-
         input.close();
     }
 
-    static int getRoll(){
+    static int getRoll() {
         int roll = input.nextInt();
-        while (roll < 0 || roll > 10){
+        while (roll < 0 || roll > 10) {
             System.out.println("Try again by entering a score between 0 and 10 - ");
             roll = input.nextInt();
         }
@@ -43,12 +44,43 @@ public class assignment_3 {
         return roll;
     }
 
-    static void getTurnScores(){
+    static void getTurnScores(String player) {
+        int firstRoll = getRoll();
+        int bonus = 0;
+
+        System.out.println(player + ", insert your first roll - ");
+        if (firstRoll == 10) {
+            System.out.print("*** STRIKE ***");
+            for (int i = 0; i < 2; i++) {
+                System.out.println(player + ", enter score for bonus roll " + (i + 1) + ":");
+                bonus += getRoll();
+            }
+            return 10 + bonus;
+
+        } else {
+            System.out.println(player + ", insert your second roll - ");
+            int secondRoll = getRoll();
+            if (firstRoll + secondRoll == 10) {
+                System.out.print("*** SPAARE ***");
+                System.out.println(player + ", enter score for bonus roll:");
+                bonus += getRoll();
+
+                return 10 + bonus;
+
+            } else {
+                return firstRoll + secondRoll;
+            }
+
+        }
 
     }
 
-    static void getGameScores(String player){
-
+    static int[] getGameScores(String player) {
+        int [] playerScore = new int [10];
+        for (int frame = 0; frame < 10; frame++) {
+            playerScore[frame] = getTurnScores(player, );
+        }
+        return playerScore;
     }
 
 }
