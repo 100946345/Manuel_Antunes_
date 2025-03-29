@@ -28,9 +28,8 @@ public class Assignment_4 {
         }
         System.out.println("Loading...\n");
 
-
         Game game = new Game();
-        System.out.println("Starting Bowling Game!");
+        System.out.println("Starting Bowling Game ");
         game.playGame(players[0], players[1]);
 
         input.close();

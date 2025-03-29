@@ -17,40 +17,53 @@ public class Game {
             for (Player player : new Player[]{player1, player2}) {
 
                 boolean validTurn = false;
-                int roll1 = 0;
-                int roll2 = 0;
+                int firstRoll = 0;
+                int secondRoll = 0;
+                int bonus = 0;
+
                 while (!validTurn) {
                     try {
-                        if (roll1 == 0) {
-                            System.out.print(player.getName() + "'s, enter pins for first roll - ");
-                            roll1 = scanner.nextInt();
-                            if (roll1 < 0 || roll1 > 10) {
-                                throw new CustomValidationException("Invalid number of pins knocked down: " + roll1);
+                        System.out.print(player.getName() + "'s, enter pins for first roll - ");
+                        firstRoll = scanner.nextInt();
+                        if (firstRoll < 0 || firstRoll > 10) {
+                            throw new CustomValidationException("Invalid number of pins knocked down: " + firstRoll);
+                        }
+
+                        boolean isStrike = (firstRoll == 10);
+                        if (isStrike) {
+                            System.out.println("*** STRIKE ***");
+                            int bonusRoll1 = getBonusRoll(player.getName(), 1, scanner);
+                            int bonusRoll2 = getBonusRoll(player.getName(), 2, scanner);
+                            bonus = bonusRoll1 + bonusRoll2;
+                            secondRoll = 0;
+                        } else {
+                            System.out.print(player.getName() + "'s, enter pins for second roll - ");
+                            secondRoll = scanner.nextInt();
+                            if (secondRoll < 0 || secondRoll > 10 || firstRoll + secondRoll > 10) {
+                                throw new CustomValidationException("Invalid number of total pins knocked down in a frame - "
+                                        + (firstRoll + secondRoll));
                             }
                         }
 
-                        System.out.print(player.getName() + "'s, enter pins for second roll - ");
-                        roll2 = scanner.nextInt();
-                        if (roll2 < 0 || roll2 > 10) {
-                            throw new CustomValidationException("Invalid number of pins knocked down: " + roll2);
+                        if (!isStrike && firstRoll + secondRoll == 10) {
+                            System.out.println("*** SPARE ***");
+                            bonus = getBonusRoll(player.getName(), 1, scanner);
+                        } else {
+                            bonus = 0;
                         }
 
-                        if (roll1 + roll2 > 10) {
-                            throw new CustomValidationException("Invalid number of total pins knocked down in a frame: " +
-                                    (roll1 + roll2));
-                        }
+                        int frameScore = firstRoll + secondRoll + bonus;
+                        player.updateScore(frameScore);
 
-                        Turn turn = new Turn(roll1, roll2);
-                        player.updateScore(turn.getScore());
-                        System.out.println(turn);
+                        System.out.println("Throw 1 - " + firstRoll + " || Throw 2 - " + secondRoll + " || Score - " + frameScore);
                         System.out.println();
                         validTurn = true;
                     } catch (CustomValidationException e) {
                         System.out.println(e.getMessage() + " Please try again.");
+
                     }
                 }
             }
-
 
         }
         if (player1.getScore() > player2.getScore()) {
@@ -59,10 +72,27 @@ public class Game {
             winner = player2;
         } else {
             System.out.println("It's a tie ");
-            return;}
+            return;
+        }
         System.out.println("Winner: " + winner.getName());
         scanner.close();
+    }
 
+    static int getBonusRoll(String playerName, int bonusIndex, Scanner scanner) {
+        int bonus = 0;
+        while (true) {
+            try {
+                System.out.print(playerName + ", enter score for bonus roll " + bonusIndex + ": ");
+                bonus = scanner.nextInt();
+                if (bonus < 0 || bonus > 10) {
+                    throw new CustomValidationException("Invalid number of pins knocked down: " + bonus);
+                }
+                break;
+            } catch (CustomValidationException e) {
+                System.out.println(e.getMessage() + " Please try again.");
+            }
+        }
+        return bonus;
     }
 
     public String toString() {
