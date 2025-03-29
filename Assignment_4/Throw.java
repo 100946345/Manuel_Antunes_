@@ -1,4 +1,4 @@
-class Throw {
+public class Throw {
 
     private int pins;
     private boolean isStrike;

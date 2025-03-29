@@ -1,4 +1,4 @@
-class Game {
+public class Game {
 
     private int frame = 1;
     private Player winner;
