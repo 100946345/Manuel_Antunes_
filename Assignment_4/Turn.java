@@ -5,14 +5,20 @@ public class Turn {
     private int score;
 
     public Turn(Throw throwOne, Throw throwTwo) {
-        this.throwOne = throwOne;
-        this.throwTwo = throwTwo;
+        this.throw_one = throwOne;
+        this.throw_two = throwTwo;
         this.score = throwOne.getPins() + throwTwo.getPins();
     }
 
+    public int getScore() {
+        return score;
+    }
 
     public String toString() {
 
-        return "";
+        return "Throw 1: " + throw_one.getPins() + ", Throw 2: " + throw_two.getPins() +
+                ", Score: " + score;
+
     }
 }
+

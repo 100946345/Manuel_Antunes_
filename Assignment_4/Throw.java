@@ -21,4 +21,8 @@ public class Throw {
         return isSpare;
 
     }
+    public void setSpare(boolean spare) {
+        isSpare = spare;
+    }
+
 }
