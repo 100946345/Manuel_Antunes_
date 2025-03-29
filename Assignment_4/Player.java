@@ -1,4 +1,4 @@
-class Player {
+public class Player {
 
     private String name;
     private int wins = 0;
@@ -44,6 +44,6 @@ class Player {
                 "                Name - " + name + "\n" +
                 "                Wins - " + wins + "\n" +
                 "                Score - " + score+"\n";
-        
+
     }
 }
