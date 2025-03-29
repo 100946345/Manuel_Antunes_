@@ -1,5 +1,5 @@
 /*   Name: Manuel Antunes
-     Date: 2025-03-20
+     Date: 2025-03-29
      Description: This program calculates the results of a bowling
      game and declares the winner for each game. It supports multiple
      games and results are showing after each game.
