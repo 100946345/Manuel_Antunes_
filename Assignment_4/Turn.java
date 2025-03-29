@@ -4,18 +4,22 @@ public class Turn {
     private Throw throw_two;
     private int score;
 
-    public Turn(Throw throwOne, Throw throwTwo) {
-        this.throw_one = throwOne;
-        this.throw_two = throwTwo;
-        this.score = throwOne.getPins() + throwTwo.getPins();
-
-        if (throwOne.isStrike()) {
-            score += 10;
-        } else if (score == 10) {
-            score += 5;
-        }
-
+    public Turn(int throwOnePins, int throwTwoPins) throws CustomValidationException {
+        this.throw_one = new Throw(throwOnePins);
+        this.throw_two = new Throw(throwTwoPins);
+        calculateFrameScore();
     }
+
+    private void calculateFrameScore() {
+        score = throw_one.getPins() + throw_two.getPins();
+
+        if (throw_one.isStrike()) {
+            score = throw_one.getPins();
+        } else if (throw_one.getPins() + throw_two.getPins() == 10) {
+            throw_two.setSpare(true);
+        }
+    }
+
 
     public int getScore() {
         return score;

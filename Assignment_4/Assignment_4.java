@@ -25,33 +25,13 @@ public class Assignment_4 {
                 System.out.println(e.getMessage() + " Please try again.");
             }
 
-            for (int gameNumber = 1; gameNumber <= 3; gameNumber++) {
-                System.out.println("\nStarting Game " + gameNumber + "!");
-                Game game = new Game();
+        }
+        System.out.println("Loading...\n");
 
-                while (!game.isComplete()) { // Implement this method in Game class
-                    for (Player player : players) {
-                        System.out.println("Current frame: " + game.getFrame());
-                        System.out.println(player.getName() + "'s turn!");
 
-                        System.out.print("Enter score for " + player.getName() + ": ");
-                        int score = input.nextInt();
-
-                        game.playTurn(player, score);
-                    }
-                }
-
-                Player winner = game.getWinner(); // Define logic in Game class
-                System.out.println("\nGame " + gameNumber + " Winner: " + (winner != null ? winner.getName() : "No one!"));
-                if (winner != null) {
-                    winner.setWins(winner.getWins() + 1);
-                }
-            }
-
-            System.out.println("\nFinal Results:");
-            for (Player player : players) {
-                System.out.println(player);
-            }
+        Game game = new Game();
+        System.out.println("Starting Bowling Game!");
+        game.playGame(players[0], players[1]);
 
         input.close();
     }

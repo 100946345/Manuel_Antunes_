@@ -1,17 +1,19 @@
 public class Player {
 
     private String name;
-    private int wins = 0;
-    private int score = 501;
+    private int wins;
+    private int score;
 
-
-    public Player(String name) throws CustomValidationException {
-        if (name.trim().isEmpty() || name.matches(".*[!@#$%^&*/|?\\\\<>=\'\"].*")) {
-            throw new IllegalArgumentException("The name can't be empty or contain inappropriate words.");
+    public Player(String name) throws CustomValidationException{
+        if (name == null || name.isEmpty()) {
+            throw new CustomValidationException("Player name cannot be empty.");
         }
-        this.name = name;
 
+        this.name = name;
+        this.wins = 0;
+        this.score = 501;
     }
+
 
     public String getName() {
         return name;
@@ -26,16 +28,15 @@ public class Player {
     }
 
 
-    public  void setWins(int wins){
-        if (wins<0){
-            throw new IllegalArgumentException ("Wins can't be negative");
-        }this.wins = wins;
+    public void incrementWins() {
+        this.wins++;
     }
 
-    public  void setScore(int score){
-        if (score<0){
-            throw new IllegalArgumentException ("The score can't be negative");
-        }this.score = score;
+    public void updateScore(int pins) {
+        if (pins < 0) {
+            throw new IllegalArgumentException("Pins knocked down cannot be negative.");
+        }
+        this.score += pins;
     }
 
     public String toString(){

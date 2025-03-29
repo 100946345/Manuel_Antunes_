@@ -1,29 +1,52 @@
+import java.util.Scanner;
+
 public class Game {
 
-    private int frame = 1;
+    private int frame;
     private Player winner;
 
-    public void playTurn(Player player, int score) {
-
-        player.setScore(player.getScore() + score);
-        frame++;
+    public Game() {
+        this.frame = 1;
     }
 
-    public int getFrame() {
-        return frame;
-    }
+    public void playGame(Player player1, Player player2) {
+        Scanner scanner = new Scanner(System.in);
 
-    public boolean isComplete() {
-        return frame > 10;
-    }
+        for (frame = 1; frame <= 10; frame++) {
+            System.out.println("Frame " + frame);
+            for (Player player : new Player[]{player1, player2}) {
 
-    public Player getWinner() {
-        return winner;
-    }
+                try {
+                    System.out.println(player.getName() + "'s, enter pins for first roll:");
+                    int roll1 = scanner.nextInt();
 
+                    System.out.print(player.getName() + "'s, enter pins for second roll:");
+                    int roll2 = scanner.nextInt();
+
+                    Turn turn = new Turn(roll1, roll2);
+                    player.updateScore(turn.getScore());
+                    System.out.println(turn);
+                } catch (CustomValidationException e) {
+                    System.out.println(e.getMessage() + " Please try again.");
+                    frame--;
+                }
+            }
+
+        }
+        if (player1.getScore() > player2.getScore()) {
+            winner = player1;
+        } else if (player2.getScore() > player1.getScore()) {
+            winner = player2;
+        } else {
+            System.out.println("It's a tie ");
+            return;}
+        System.out.println("Winner: " + winner.getName());
+        scanner.close();
+
+    }
 
     public String toString() {
 
-        return "Current Frame: " + frame + ", Winner: " + (winner != null ? winner.getName() : "TBD");
+        return "Current Frame: " + frame + ", Winner: " + (winner != null ? winner.getName() : "None");
     }
 }
