@@ -21,7 +21,7 @@ public class Assignment_4 {
                 String name = input.nextLine();
                 players[currentPlayer] = new Player(name);
                 currentPlayer++;
-            } catch (IllegalArgumentException e) {
+            } catch (CustomValidationException e) {
                 System.out.println(e.getMessage() + " Please try again.");
             }
         }
