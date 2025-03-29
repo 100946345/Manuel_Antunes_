@@ -24,15 +24,35 @@ public class Assignment_4 {
             } catch (CustomValidationException e) {
                 System.out.println(e.getMessage() + " Please try again.");
             }
-        }
-        players[0].setWins(7);
-        players[0].setScore(160);
 
-        players[1].setWins(3);
-        players[1].setScore(60);
+            for (int gameNumber = 1; gameNumber <= 3; gameNumber++) {
+                System.out.println("\nStarting Game " + gameNumber + "!");
+                Game game = new Game();
 
-        System.out.println(players[0]);
-        System.out.println(players[1]);
+                while (!game.isComplete()) { // Implement this method in Game class
+                    for (Player player : players) {
+                        System.out.println("Current frame: " + game.getFrame());
+                        System.out.println(player.getName() + "'s turn!");
+
+                        System.out.print("Enter score for " + player.getName() + ": ");
+                        int score = input.nextInt();
+
+                        game.playTurn(player, score);
+                    }
+                }
+
+                Player winner = game.getWinner(); // Define logic in Game class
+                System.out.println("\nGame " + gameNumber + " Winner: " + (winner != null ? winner.getName() : "No one!"));
+                if (winner != null) {
+                    winner.setWins(winner.getWins() + 1);
+                }
+            }
+
+            System.out.println("\nFinal Results:");
+            for (Player player : players) {
+                System.out.println(player);
+            }
+
         input.close();
     }
 }
