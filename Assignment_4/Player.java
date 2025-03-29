@@ -2,7 +2,7 @@ public class Player {
 
     private String name;
     private int wins = 0;
-    private int score = 0;
+    private int score = 501;
 
 
     public Player(String name) throws CustomValidationException {
