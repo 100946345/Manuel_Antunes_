@@ -24,6 +24,6 @@ public class Game {
 
     public String toString() {
 
-        return "";
+        return "Current Frame: " + frame + ", Winner: " + (winner != null ? winner.getName() : "TBD");
     }
 }
