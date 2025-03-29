@@ -22,7 +22,7 @@ public class Assignment_4 {
                 players[currentPlayer] = new Player(name);
                 currentPlayer++;
             } catch (CustomValidationException e) {
-                System.out.println(e.getMessage() + " Please try again.");
+                System.out.println(e.getMessage() + " ** Please try again **");
             }
 
         }

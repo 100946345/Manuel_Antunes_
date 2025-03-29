@@ -5,6 +5,12 @@ public class Turn {
     private int score;
 
     public Turn(int throwOnePins, int throwTwoPins) throws CustomValidationException {
+
+        if (throwOnePins + throwTwoPins > 10) {
+            throw new CustomValidationException("Invalid number of total pins knocked down in a frame: " +
+                    (throwOnePins + throwTwoPins));
+        }
+
         this.throw_one = new Throw(throwOnePins);
         this.throw_two = new Throw(throwTwoPins);
         calculateFrameScore();
@@ -27,8 +33,8 @@ public class Turn {
 
     public String toString() {
 
-        return "Throw 1: " + throw_one.getPins() + ", Throw 2: " + throw_two.getPins() +
-                ", Score: " + score;
+        return "Throw 1 - " + throw_one.getPins() + " || Throw 2 - " + throw_two.getPins() +
+                " || Score - " + score;
 
     }
 }

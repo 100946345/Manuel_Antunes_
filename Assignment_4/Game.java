@@ -16,21 +16,41 @@ public class Game {
             System.out.println("Frame " + frame);
             for (Player player : new Player[]{player1, player2}) {
 
-                try {
-                    System.out.println(player.getName() + "'s, enter pins for first roll:");
-                    int roll1 = scanner.nextInt();
+                boolean validTurn = false;
+                int roll1 = 0;
+                int roll2 = 0;
+                while (!validTurn) {
+                    try {
+                        if (roll1 == 0) {
+                            System.out.print(player.getName() + "'s, enter pins for first roll - ");
+                            roll1 = scanner.nextInt();
+                            if (roll1 < 0 || roll1 > 10) {
+                                throw new CustomValidationException("Invalid number of pins knocked down: " + roll1);
+                            }
+                        }
 
-                    System.out.print(player.getName() + "'s, enter pins for second roll:");
-                    int roll2 = scanner.nextInt();
+                        System.out.print(player.getName() + "'s, enter pins for second roll - ");
+                        roll2 = scanner.nextInt();
+                        if (roll2 < 0 || roll2 > 10) {
+                            throw new CustomValidationException("Invalid number of pins knocked down: " + roll2);
+                        }
 
-                    Turn turn = new Turn(roll1, roll2);
-                    player.updateScore(turn.getScore());
-                    System.out.println(turn);
-                } catch (CustomValidationException e) {
-                    System.out.println(e.getMessage() + " Please try again.");
-                    frame--;
+                        if (roll1 + roll2 > 10) {
+                            throw new CustomValidationException("Invalid number of total pins knocked down in a frame: " +
+                                    (roll1 + roll2));
+                        }
+
+                        Turn turn = new Turn(roll1, roll2);
+                        player.updateScore(turn.getScore());
+                        System.out.println(turn);
+                        System.out.println();
+                        validTurn = true;
+                    } catch (CustomValidationException e) {
+                        System.out.println(e.getMessage() + " Please try again.");
+                    }
                 }
             }
+
 
         }
         if (player1.getScore() > player2.getScore()) {
