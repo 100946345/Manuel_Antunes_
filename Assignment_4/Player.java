@@ -5,7 +5,7 @@ public class Player {
     private int score;
 
     public Player(String name) throws CustomValidationException{
-        if (name == null || name.isEmpty()) {
+        if ( name.isEmpty()) {
             throw new CustomValidationException("Player name cannot be empty.");
         }
 
@@ -32,13 +32,16 @@ public class Player {
         this.wins++;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void updateScore(int pins) {
         if (pins < 0) {
             throw new IllegalArgumentException("Pins knocked down cannot be negative.");
         }
         this.score += pins;
     }
-
     public String toString(){
         return "                \n[Player]\n" +
                 "                Name - " + name + "\n" +
