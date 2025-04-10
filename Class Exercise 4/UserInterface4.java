@@ -1,10 +1,3 @@
-/*   Name: Manuel Antunes
-     Date: 2025-04-10
-     Description: This program is a simple copy of Notepad, allowing the user
-     to save and open files, clear the window, or exit the application.
-
-*/
-
 import javax.swing.*;
 //basic windows tools
 import java.awt.*;
@@ -15,7 +8,7 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class UserInterface4 {
+public class userInterface {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Text Editor");
         frame.setSize(700, 600);
@@ -28,12 +21,17 @@ public class UserInterface4 {
         JButton saveButton = new JButton("Save");
         JButton openButton = new JButton("Open");
         JButton exitButton = new JButton("Exit");
+        JButton clearButton = new JButton("Clear");
 
+
+        // Panel to hold buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.add(saveButton);
         buttonPanel.add(openButton);
+        buttonPanel.add(clearButton);
         buttonPanel.add(exitButton);
+
 
 
         saveButton.addActionListener(new ActionListener() {
@@ -53,6 +51,7 @@ public class UserInterface4 {
                 }
             }
         });
+
 
         // Open button functionality
         openButton.addActionListener(new ActionListener() {
@@ -76,7 +75,6 @@ public class UserInterface4 {
             }
         });
 
-
         // Exit Button
         exitButton.addActionListener(new ActionListener() {
             @Override
@@ -95,5 +93,13 @@ public class UserInterface4 {
         });
 
 
+
+
+
+        frame.setLayout(new BorderLayout());
+        frame.add(buttonPanel, BorderLayout.NORTH);
+        frame.add(scrollPane, BorderLayout.CENTER);
+
+        frame.setVisible(true);
     }
 }
