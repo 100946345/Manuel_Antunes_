@@ -77,5 +77,23 @@ public class UserInterface4 {
         });
 
 
+        // Exit Button
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0); // Terminates the program
+            }
+        });
+
+
+        //Clear Button
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.setText(""); // Clears all text
+            }
+        });
+
+
     }
 }
