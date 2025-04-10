@@ -54,5 +54,28 @@ public class UserInterface4 {
             }
         });
 
+        // Open button functionality
+        openButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int option = fileChooser.showOpenDialog(null);
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    try (BufferedReader reader = new BufferedReader(new FileReader(fileChooser.getSelectedFile()))) {
+                        textArea.setText("");
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            textArea.append(line + "\n");
+                        }
+                        JOptionPane.showMessageDialog(frame, "File loaded successfully!");
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(frame, "Error encounter.", "Error", JOptionPane.ERROR_MESSAGE);
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
     }
 }
