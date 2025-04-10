@@ -8,6 +8,10 @@
 import javax.swing.*;
 //basic windows tools
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class UserInterface4 {
     public static void main(String[] args) {
@@ -28,6 +32,25 @@ public class UserInterface4 {
         buttonPanel.add(saveButton);
         buttonPanel.add(openButton);
         buttonPanel.add(exitButton);
+
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int option = fileChooser.showSaveDialog(null);
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    try (FileWriter writer = new FileWriter(fileChooser.getSelectedFile())) {
+                        writer.write(textArea.getText());
+                        JOptionPane.showMessageDialog(frame, "File saved successfully!");
+                        System.out.println("File saved at: " + fileChooser.getSelectedFile().getAbsolutePath()); // Debugging
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(frame, "Error saving file.", "Error", JOptionPane.ERROR_MESSAGE);
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
 
     }
 }
