@@ -185,6 +185,39 @@ public class UserInterface_Final {
             String vet = rbAntunes.isSelected()? "Dr. Antunes" :
                     rbBalboa.isSelected()? "Dr. Balboa": "Dr. Taboada";
 
+            // Error Messages
+            //StringBuilder object
+            StringBuilder errorMessage = new StringBuilder();
+            if (patient.isEmpty())
+                errorMessage.append("Patient name cannot be empty.<br>");
+            if (owner.isEmpty())
+                errorMessage.append("Owner name cannot be empty.<br>");
+            if (!isValidEmail(email))
+                errorMessage.append("Invalid email address.<br>");
+
+            //return those errors to the user
+            if (!errorMessage.isEmpty()) {
+                lblMessage.setText("<html>" + errorMessage + "</html>");
+                return;
+            }
+
+
+            Date date = new Date();
+            //open file browser window
+            JFileChooser fileChooser = new JFileChooser();
+            //title
+            fileChooser.setDialogTitle("Save Patient Record");
+
+            //Open the "save as" window
+            if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+                //let the user write the file's name
+                try (FileWriter writer = new FileWriter(fileChooser.getSelectedFile())) {
+                    writer.write("**Patient Registration Document**\n");
+                    writer.write("Patient: " + patient + "\n");
+                    writer.write("Owner: " +owner + "\n");
+                    writer.write("Email: " +email + "\n");
+
+
 
 
 
