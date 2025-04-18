@@ -54,6 +54,47 @@ public class UserInterface_Final {
         Dimension inputSize = new Dimension(350, 40);
 
 
+        // Patient Name
+        layout.gridx = 0; layout.gridy = 0;
+        JLabel lblPatient = new JLabel("Patient Name:");
+        lblPatient.setFont(labelFont);
+        //add the component into the frame
+        frame.add(lblPatient, layout);
+        layout.gridy = 1;
+        txtPatient = new JTextField();
+        txtPatient.setPreferredSize(inputSize);
+        txtPatient.setFont(inputFont);
+        //add the component into the frame
+        frame.add(txtPatient, layout);
+
+
+        // Owner Name
+        layout.gridx = 0; layout.gridy = 2;
+        JLabel lblOwner = new JLabel("Owner Name:");
+        lblOwner.setFont(labelFont);
+        //add the component into the frame
+        frame.add(lblOwner, layout);
+        layout.gridy = 3;
+        txtOwner = new JTextField();
+        txtOwner.setPreferredSize(inputSize);
+        txtOwner.setFont(inputFont);
+        //add the component into the frame
+        frame.add(txtOwner, layout);
+
+
+        // Email Address
+        layout.gridx = 0; layout.gridy = 4;
+        JLabel lblEmail = new JLabel("Email Address:");
+        lblEmail.setFont(labelFont);
+        //add the component into the frame
+        frame.add(lblEmail, layout);
+        layout.gridy = 5;
+        txtEmail = new JTextField();
+        txtEmail.setPreferredSize(inputSize);
+        txtEmail.setFont(inputFont);
+        //add the component into the frame
+        frame.add(txtEmail, layout);
+
 
 
 
