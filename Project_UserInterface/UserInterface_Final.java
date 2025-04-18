@@ -164,6 +164,12 @@ public class UserInterface_Final {
         frame.setVisible(true);
     }
 
+    private void clearFrame() {
+        txtPatient.setText("");
+        txtOwner.setText("");
+        txtEmail.setText("");
+        lblMessage.setText(" ");
+    }
 
 
 
