@@ -27,6 +27,23 @@ class Patient {
     private final String owner;
     private final String email;
     private final String veterinarian;
+
+    public Patient(String name, String owner, String email, String veterinarian) {
+        this.name = name;
+        this.owner = owner;
+        this.email = email;
+        this.veterinarian = veterinarian;
+    }
+
+    @Override
+    public String toString() {
+        return "**Patient Registration Document**\n" +
+                "Patient: " + name + "\n" +
+                "Owner: " + owner + "\n" +
+                "Email: " + email + "\n" +
+                "Veterinarian: " + veterinarian + "\n" +
+                "Date: " + new Date() + "\n";
+    }
 }
 
 
