@@ -185,9 +185,9 @@ public class VeterinaryClinicUI {
         frame.add(buttonPanel, layout);
 
         // Event Listeners (clicked)
-        btnRegister.addActionListener(new UserInterface_Final.RegisterTaken());
-        btnClear.addActionListener(_-> clearFrame());
-        btnExit.addActionListener(_-> System.exit(0));//no errors
+        btnRegister.addActionListener(new RegisterHandler());
+        btnClear.addActionListener(_ -> clearFrame());
+        btnExit.addActionListener(_ -> System.exit(0));//no errors
 
         //prompt the frame
         frame.setVisible(true);
@@ -242,13 +242,8 @@ public class VeterinaryClinicUI {
             if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
                 //let the user write the file's name
                 try (FileWriter writer = new FileWriter(fileChooser.getSelectedFile())) {
-                    writer.write("**Patient Registration Document**\n");
-                    writer.write("Patient: " + patient + "\n");
-                    writer.write("Owner: " + owner + "\n");
-                    writer.write("Email: " + email + "\n");
-                    writer.write("Veterinarian: " + vet + "\n");
-                    writer.write("Date: " + date + "\n");
-                    lblMessage.setText("File saved successfully!");
+                    writer.write(new Patient(patient, owner, email, vet).toString());
+                    lblMessage.setText("<html>File saved successfully!</html>");
                 } catch (IOException ex) {
                     lblMessage.setText("Error: Unable to save file.");
                 }
