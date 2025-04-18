@@ -183,8 +183,8 @@ public class UserInterface_Final {
             String owner = txtOwner.getText().trim();
             String email = txtEmail.getText().trim();
             //ternary operator
-            String vet = rbAntunes.isSelected()? "Dr. Antunes" :
-                    rbBalboa.isSelected()? "Dr. Balboa": "Dr. Taboada";
+            String vet = rbAntunes.isSelected() ? "Dr. Antunes" :
+                    rbBalboa.isSelected() ? "Dr. Balboa" : "Dr. Taboada";
 
             // Error Messages
             //StringBuilder object
@@ -226,11 +226,12 @@ public class UserInterface_Final {
             }
         }
 
-
-
-
-
-
+        //Email Validation
+        private boolean isValidEmail(String email) {
+            String regexPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+            return Pattern.compile(regexPattern).matcher(email).matches();
+        }
+    }
 
         public static void main(String[] args) {
         // runs Swing Event Dispatch Thread
