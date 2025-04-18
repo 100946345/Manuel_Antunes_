@@ -96,6 +96,73 @@ public class UserInterface_Final {
         frame.add(txtEmail, layout);
 
 
+        // Veterinarian
+        layout.gridx = 0; layout.gridy = 6;
+        JLabel lblVet = new JLabel("Choose the Veterinarian:");
+        lblVet.setFont(labelFont);
+        //add the component into the frame
+        frame.add(lblVet, layout);
+        layout.gridy = 7;
+        rbAntunes = new JRadioButton("Dr. Antunes", true);
+        rbBalboa = new JRadioButton("Dr. Balboa");
+        JRadioButton rbTaboada = new JRadioButton("Dr. Taboada");
+
+        //group of vet options selected
+        ButtonGroup vetGroup = new ButtonGroup();
+        vetGroup.add(rbAntunes);
+        vetGroup.add(rbBalboa);
+        vetGroup.add(rbTaboada);
+
+        //layout buttons
+        JPanel vetPanel = new JPanel(new GridLayout(1, 3));
+        rbAntunes.setFont(inputFont);
+        rbBalboa.setFont(inputFont);
+        rbTaboada.setFont(inputFont);
+        // add radio buttons into the vetPanel format
+        vetPanel.add(rbAntunes);
+        vetPanel.add(rbBalboa);
+        vetPanel.add(rbTaboada);
+        //add the components as part of the frame
+        frame.add(vetPanel, layout);
+
+
+
+        // Message Label
+        layout.gridy = 8;
+        //new label
+        lblMessage = new JLabel(" ");
+        lblMessage.setFont(labelFont);
+        //add the component into the frame
+        frame.add(lblMessage, layout);
+
+
+        // News buttons
+        layout.gridy = 9;
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 10, 10));
+        JButton btnRegister = new JButton("Register");
+        JButton btnClear = new JButton("Clear");
+        JButton btnExit = new JButton("Exit");
+
+
+        btnRegister.setFont(inputFont);
+        btnClear.setFont(inputFont);
+        btnExit.setFont(inputFont);
+
+        //add them into the buttonPanel
+        buttonPanel.add(btnRegister);
+        buttonPanel.add(btnClear);
+        buttonPanel.add(btnExit);
+        //add the components into the frame
+        frame.add(buttonPanel, layout);
+
+        // Event Listeners (clicked)
+        btnRegister.addActionListener(new UserInterfaceFinal.RegisterTaken());
+        btnClear.addActionListener(_-> clearFrame());
+        btnExit.addActionListener(_-> System.exit(0));//no errors
+
+        //prompt the frame
+        frame.setVisible(true);
+    }
 
 
 
