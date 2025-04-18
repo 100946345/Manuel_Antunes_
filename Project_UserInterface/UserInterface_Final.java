@@ -6,9 +6,9 @@ and record management.
 
  */
 //user interface elements
-         import javax.swing.*;
+import javax.swing.*;
 //layout and design
-        import java.awt.*;
+import java.awt.*;
 
 //action taken for buttons
         import java.awt.event.ActionEvent;
@@ -22,7 +22,15 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 
-public class UserInterface_Final {
+class Patient {
+    private final String name;
+    private final String owner;
+    private final String email;
+    private final String veterinarian;
+}
+
+
+public class VeterinaryClinicUI {
     //window frame
     private final JFrame frame;
     //all the components (textfield)
@@ -32,11 +40,12 @@ public class UserInterface_Final {
     //set the buttons
     private final JRadioButton rbAntunes;
     private final JRadioButton rbBalboa;
+    private final JRadioButton rbTaboada
     //errors message
     private final JLabel lblMessage;
 
 
-    public UserInterfaceFinal() {
+    public VeterinaryClinicUI() {
         frame = new JFrame("Veterinary clinic [Patient registration]");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 500);
@@ -64,6 +73,7 @@ public class UserInterface_Final {
         txtPatient = new JTextField();
         txtPatient.setPreferredSize(inputSize);
         txtPatient.setFont(inputFont);
+        txtPatient.setToolTipText("Enter the name of the patient");
         //add the component into the frame
         frame.add(txtPatient, layout);
 
@@ -78,6 +88,7 @@ public class UserInterface_Final {
         txtOwner = new JTextField();
         txtOwner.setPreferredSize(inputSize);
         txtOwner.setFont(inputFont);
+        txtOwner.setToolTipText("Enter the name of the pet owner");
         //add the component into the frame
         frame.add(txtOwner, layout);
 
@@ -92,6 +103,7 @@ public class UserInterface_Final {
         txtEmail = new JTextField();
         txtEmail.setPreferredSize(inputSize);
         txtEmail.setFont(inputFont);
+        txtEmail.setToolTipText("Enter a valid email address");
         //add the component into the frame
         frame.add(txtEmail, layout);
 
@@ -105,7 +117,7 @@ public class UserInterface_Final {
         layout.gridy = 7;
         rbAntunes = new JRadioButton("Dr. Antunes", true);
         rbBalboa = new JRadioButton("Dr. Balboa");
-        JRadioButton rbTaboada = new JRadioButton("Dr. Taboada");
+        rbTaboada = new JRadioButton("Dr. Taboada");
 
         //group of vet options selected
         ButtonGroup vetGroup = new ButtonGroup();
@@ -156,7 +168,7 @@ public class UserInterface_Final {
         frame.add(buttonPanel, layout);
 
         // Event Listeners (clicked)
-        btnRegister.addActionListener(new UserInterfaceFinal.RegisterTaken());
+        btnRegister.addActionListener(new UserInterface_Final.RegisterTaken());
         btnClear.addActionListener(_-> clearFrame());
         btnExit.addActionListener(_-> System.exit(0));//no errors
 
@@ -235,6 +247,6 @@ public class UserInterface_Final {
 
         public static void main(String[] args) {
         // runs Swing Event Dispatch Thread
-        SwingUtilities.invokeLater(UserInterfaceFinal::new);
+        SwingUtilities.invokeLater(UserInterface_Final::new);
     }
 }
