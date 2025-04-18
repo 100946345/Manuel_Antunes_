@@ -168,6 +168,7 @@ public class UserInterface_Final {
         txtPatient.setText("");
         txtOwner.setText("");
         txtEmail.setText("");
+        rbAntunes.setSelected(true);
         lblMessage.setText(" ");
     }
 
@@ -214,9 +215,16 @@ public class UserInterface_Final {
                 try (FileWriter writer = new FileWriter(fileChooser.getSelectedFile())) {
                     writer.write("**Patient Registration Document**\n");
                     writer.write("Patient: " + patient + "\n");
-                    writer.write("Owner: " +owner + "\n");
-                    writer.write("Email: " +email + "\n");
-
+                    writer.write("Owner: " + owner + "\n");
+                    writer.write("Email: " + email + "\n");
+                    writer.write("Veterinarian: " + vet + "\n");
+                    writer.write("Date: " + date + "\n");
+                    lblMessage.setText("File saved successfully!");
+                } catch (IOException ex) {
+                    lblMessage.setText("Error: Unable to save file.");
+                }
+            }
+        }
 
 
 
