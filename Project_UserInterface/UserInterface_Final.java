@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 //action taken for buttons
-        import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //write in the textfield
 import java.io.FileWriter;
@@ -57,7 +57,6 @@ public class VeterinaryClinicUI {
     //set the buttons
     private final JRadioButton rbAntunes;
     private final JRadioButton rbBalboa;
-    private final JRadioButton rbTaboada
     //errors message
     private final JLabel lblMessage;
 
@@ -81,7 +80,8 @@ public class VeterinaryClinicUI {
 
 
         // Patient Name
-        layout.gridx = 0; layout.gridy = 0;
+        layout.gridx = 0;
+        layout.gridy = 0;
         JLabel lblPatient = new JLabel("Patient Name:");
         lblPatient.setFont(labelFont);
         //add the component into the frame
@@ -96,7 +96,8 @@ public class VeterinaryClinicUI {
 
 
         // Owner Name
-        layout.gridx = 0; layout.gridy = 2;
+        layout.gridx = 0;
+        layout.gridy = 2;
         JLabel lblOwner = new JLabel("Owner Name:");
         lblOwner.setFont(labelFont);
         //add the component into the frame
@@ -111,7 +112,8 @@ public class VeterinaryClinicUI {
 
 
         // Email Address
-        layout.gridx = 0; layout.gridy = 4;
+        layout.gridx = 0;
+        layout.gridy = 4;
         JLabel lblEmail = new JLabel("Email Address:");
         lblEmail.setFont(labelFont);
         //add the component into the frame
@@ -126,7 +128,8 @@ public class VeterinaryClinicUI {
 
 
         // Veterinarian
-        layout.gridx = 0; layout.gridy = 6;
+        layout.gridx = 0;
+        layout.gridy = 6;
         JLabel lblVet = new JLabel("Choose the Veterinarian:");
         lblVet.setFont(labelFont);
         //add the component into the frame
@@ -134,7 +137,7 @@ public class VeterinaryClinicUI {
         layout.gridy = 7;
         rbAntunes = new JRadioButton("Dr. Antunes", true);
         rbBalboa = new JRadioButton("Dr. Balboa");
-        rbTaboada = new JRadioButton("Dr. Taboada");
+        JRadioButton rbTaboada = new JRadioButton("Dr. Taboada");
 
         //group of vet options selected
         ButtonGroup vetGroup = new ButtonGroup();
@@ -153,7 +156,6 @@ public class VeterinaryClinicUI {
         vetPanel.add(rbTaboada);
         //add the components as part of the frame
         frame.add(vetPanel, layout);
-
 
 
         // Message Label
@@ -203,20 +205,21 @@ public class VeterinaryClinicUI {
 
 
     //button click event
-    private class RegisterTaken implements ActionListener {
-        //replace a method
+    // Validate Email Format
+    private boolean isValidEmail(String email) {
+        String regexPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        return Pattern.compile(regexPattern).matcher(email).matches();
+    }
+
+    private class RegisterHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //steal the txtPatient into patient
             String patient = txtPatient.getText().trim();
             String owner = txtOwner.getText().trim();
             String email = txtEmail.getText().trim();
-            //ternary operator
-            String vet = rbAntunes.isSelected() ? "Dr. Antunes" :
-                    rbBalboa.isSelected() ? "Dr. Balboa" : "Dr. Taboada";
+            String vet = rbAntunes.isSelected() ? "Dr. Antunes" : rbBalboa.isSelected() ? "Dr. Balboa" : "Dr. Taboada";
 
-            // Error Messages
-            //StringBuilder object
+            // Error Handling
             StringBuilder errorMessage = new StringBuilder();
             if (patient.isEmpty())
                 errorMessage.append("Patient name cannot be empty.<br>");
@@ -225,40 +228,30 @@ public class VeterinaryClinicUI {
             if (!isValidEmail(email))
                 errorMessage.append("Invalid email address.<br>");
 
-            //return those errors to the user
+            // Display Errors
             if (!errorMessage.isEmpty()) {
                 lblMessage.setText("<html>" + errorMessage + "</html>");
                 return;
             }
 
-
-            Date date = new Date();
-            //open file browser window
+            // Save Patient Record
             JFileChooser fileChooser = new JFileChooser();
-            //title
             fileChooser.setDialogTitle("Save Patient Record");
 
-            //Open the "save as" window
             if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
-                //let the user write the file's name
                 try (FileWriter writer = new FileWriter(fileChooser.getSelectedFile())) {
                     writer.write(new Patient(patient, owner, email, vet).toString());
                     lblMessage.setText("<html>File saved successfully!</html>");
                 } catch (IOException ex) {
-                    lblMessage.setText("Error: Unable to save file.");
+                    lblMessage.setText("<html>Error saving file.</html>");
                 }
             }
         }
-
-        //Email Validation
-        private boolean isValidEmail(String email) {
-            String regexPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-            return Pattern.compile(regexPattern).matcher(email).matches();
-        }
     }
 
-        public static void main(String[] args) {
+
+    public static void main(String[] args) {
         // runs Swing Event Dispatch Thread
-        SwingUtilities.invokeLater(UserInterface_Final::new);
+        SwingUtilities.invokeLater(VeterinaryClinicUI::new);
     }
 }
