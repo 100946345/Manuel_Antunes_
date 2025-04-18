@@ -172,6 +172,20 @@ public class UserInterface_Final {
     }
 
 
+    //button click event
+    private class RegisterTaken implements ActionListener {
+        //replace a method
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //steal the txtPatient into patient
+            String patient = txtPatient.getText().trim();
+            String owner = txtOwner.getText().trim();
+            String email = txtEmail.getText().trim();
+            //ternary operator
+            String vet = rbAntunes.isSelected()? "Dr. Antunes" :
+                    rbBalboa.isSelected()? "Dr. Balboa": "Dr. Taboada";
+
+
 
 
 
